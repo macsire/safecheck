@@ -1,7 +1,6 @@
 # 家庭食用油・問題批號快查 v1.1
 
-GitHub Pages 靜態版。將本資料夾內 4 個檔案直接上傳到 repository 根目錄即可。
-
+GitHub Pages 靜態版。
 - `index.html`：網站入口
 - `styles.css`：全站版型與配色
 - `app.js`：首頁、兩個查詢頁、苦茶油時序與查詢資料
