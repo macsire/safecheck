@@ -42,7 +42,9 @@ function rich(text){return String(text).replace(/(泰山|福壽|福懋|中聯油
 camellia[4]={brand:'庭茂農業生技',name:'極品苦茶油',date:'2028/02/22',status:'red',note:'8/7 官方抽驗確認苯駢芘超標，停止食用並依公告處理。',source:S.aug};
 camellia.push({brand:'翰霖貿易',name:'苦茶油',date:'2028/01/21',status:'red',note:'業者自主通報苯駢芘 2.1 μg/kg；列為已確認不合格，依公告處理。',source:S.aug});
 function patchSite(){
-  document.querySelectorAll('.date').forEach(el=>{if(!el.closest('.reportPage'))el.textContent='資料至 2026.08.15'});
+  document.querySelectorAll('.date').forEach(el=>{if(!el.closest('.reportPage'))el.textContent='資料至 2026.08.18'});
+  const homeHero=document.querySelector('.shell .hero');
+  if(homeHero&&!document.querySelector('.indictmentAlert'))homeHero.insertAdjacentHTML('beforebegin','<section class="indictmentAlert" aria-labelledby="indictment-title"><div class="indictmentKicker">最新司法進度｜2026.08.18</div><h2 id="indictment-title">中聯油脂案偵查終結</h2><p class="indictmentCopy">中聯油脂案偵查終結，中聯董事長蔡清松、總經理余凌冲、泰山董事長劉偉龍、前後任總經理沈怡君與蔡國樑等人，遭檢方依《食安法》求處最重7年有期徒刑，併科8,000萬元罰金。中聯由福壽、福懋、泰山三大油脂企業共同出資，並派任經營團隊；起訴書指控，中聯油脂高層明知進口巴西黃豆熱損粒比例偏高，卻放寬進料標準，導致苯駢芘超標；泰山企業高層則被指控，在知悉所屬產品使用問題油品後，仍為營業利益不停售、不回收、不通報，持續讓問題油品流入市場。</p><a class="indictmentLink" href="https://www.tcc.moj.gov.tw/295804/295830/657577/1429734/post" target="_blank" rel="noreferrer">查看臺中地檢署官方說明 ↗</a></section>');
   document.querySelectorAll('.eventCard h3,.eventCard p').forEach(el=>{if(!el.dataset.rich){el.innerHTML=rich(el.textContent);el.dataset.rich='1'}});
   const unionBranch=document.querySelector('.branch.union');
   const camelliaReport=document.querySelector('.branch.camellia a[href="report.html"]');
