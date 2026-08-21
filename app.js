@@ -60,3 +60,26 @@ function patchSite(){
 }
 addEventListener('hashchange',()=>setTimeout(patchSite,0));
 patchSite();
+
+// v1.40：新增南投信義鄉農會／彰化再源代工線，並保留上游追查的證據分層。
+const S_v140={
+  nantou:'https://n.yam.com/Article/20260820246866',
+  news:'https://money.udn.com/money/story/7307/9703920',
+  cross:'https://pchome.megatime.com.tw/news/cat1/20260820/78718861186451227001.html',
+  label:'https://lulala.cyberbiz.co/products/m00091458'
+};
+camellia.push({brand:'南投縣信義鄉農會',name:'苦茶油',date:'2027/03/19、2027/05/06',dates:['20270319','20270506'],status:'red',note:'委託彰化再源油品興業有限公司代工；BaP 5.4 μg/kg，超過 2.0 μg/kg 限量。商品介紹頁明載中國進口苦茶籽、台灣製造；兩批次請停止食用並依公告回收。',source:S_v140.nantou});
+timeline.push(
+  ['8/18–19','alert','南投自主通報・檢驗','信義鄉農會苦茶油檢出 BaP 5.4 μg/kg','信義鄉農會通報委託彰化再源代工之苦茶油超標，涉及效期 2027/03/19、2027/05/06 兩批次；產品標示的中國進口苦茶籽與污染原因分開判讀。',S_v140.nantou,'南投衛生局資訊轉載'],
+  ['8/19','action','封存・回收・跨縣通知','南投封存392瓶、已售579瓶並通知彰化追查','南投衛生局查封庫存並要求回收退款；已售數量是流向資訊，不等同全部已回收。',S_v140.nantou,'南投衛生局資訊轉載'],
+  ['8/20','trace','彰化上游追查','再源代工與二水益興、臺中來源待釐清','新聞所引彰化衛生局初步追查指向二水益興製油工廠，部分油品涉及臺中協昌油廠，另有沙鹿油行可能製造；精確來源與苦茶籽文件仍待查核。',S_v140.cross,'跨縣追查報導']
+);
+function patchV140(){
+  document.querySelectorAll('.date').forEach(el=>{if(!el.closest('.reportPage'))el.textContent=el.closest('.storyTop')?'v1.40・資料至 2026.08.21':'資料至 2026.08.21'});
+  document.querySelectorAll('.footer span:last-child').forEach(el=>{if(!el.closest('.reportPage'))el.textContent='v1.40　更新 2026.08.21'});
+  if(location.hash==='#/camellia-check')checker('camellia-check');
+  if(location.hash==='#/camellia')story();
+  document.querySelectorAll('.eventCard h3,.eventCard p').forEach(el=>{if(!el.dataset.rich){el.innerHTML=rich(el.textContent);el.dataset.rich='1'}});
+}
+addEventListener('hashchange',()=>setTimeout(patchV140,0));
+patchV140();
