@@ -43,7 +43,7 @@ function lookup(records,isC,val){const q=norm(val??document.querySelector('#q').
 function polish(){document.querySelectorAll('.back').forEach(a=>a.textContent='家庭食用油安全專題・回到首頁');document.querySelectorAll('.date').forEach(el=>el.textContent=el.closest('.storyTop')?'v1.37a・資料至 2026.08.15':'資料至 2026.08.15');if(location.hash==='#/camellia'){const lane=document.querySelector('.lanes .lane:last-child p');if(lane)lane.textContent='臺南主動抽驗 → 8/3 驗出另外 3 件超標，後續由嘉義、臺北、臺中追查與下架。目前沒有官方證據可將這些案件併入威加／源春，或證實與中聯油脂供應鏈有關。';const footer=document.querySelector('.footer span:last-child');if(footer)footer.textContent='v1.37a　更新 2026.08.15'}}
 route();
 // v1.37 全站整合：以最新產品批次資料同步兩條事件線，並在兩個時序頁套用品牌／產品字重。
-function rich(text){return String(text).replace(/(泰山|福壽|福懋|中聯油脂|南僑|連淨|永豐餘生技|國際機能食品|威加|源春|聚興製油工廠|德昌商號|宮北合作農場|百年堂|鑫隆發|由豐|金品芳|協昌油行|富香|協億油行|南投縣農會食品加工廠|松鼎|松鼎實業|祥記|崇贏實業|庭茂農業生技|麻油車|統購實業|南投縣信義鄉農會|再源油品興業)/g,'<strong class="brandName">$1</strong>').replace(/(315-1150404 大豆沙拉油|好理調合油|大豆沙拉油|精選蔬菜油|苦茶油|在地金花小菓苦茶油|台灣苦茶油|極品苦茶油|東山苦茶油|頂級冷壓苦茶油|由豐將苦茶油（100%）|富香純100%苦茶油|100%冷壓苦茶油|松鼎高山苦茶油|祥記100%頂級茶仔油)/g,'<span class="productName">$1</span>')}
+function rich(text){return String(text).replace(/(泰山|福壽|福懋|中聯油脂|南僑|連淨|永豐餘生技|國際機能食品|威加|源春|聚興製油工廠|德昌商號|宮北合作農場|百年堂|鑫隆發|由豐|庭茂農業生技|麻油車|統購實業)/g,'<strong class="brandName">$1</strong>').replace(/(315-1150404 大豆沙拉油|好理調合油|大豆沙拉油|精選蔬菜油|苦茶油|在地金花小菓苦茶油|台灣苦茶油|極品苦茶油|東山苦茶油|頂級冷壓苦茶油)/g,'<span class="productName">$1</span>')}
 camellia[4]={brand:'庭茂農業生技',name:'極品苦茶油',date:'2028/02/22',status:'red',note:'8/7 官方抽驗確認苯駢芘超標，停止食用並依公告處理。',source:S.aug};
 camellia.push({brand:'翰霖貿易',name:'苦茶油',date:'2028/01/21',status:'red',note:'業者自主通報苯駢芘 2.1 μg/kg；列為已確認不合格，依公告處理。',source:S.aug});
 function patchSite(){
@@ -84,38 +84,32 @@ function patchV140(){
 addEventListener('hashchange',()=>setTimeout(patchV140,0));
 patchV140();
 
-// v1.41：追平至 2026/08/24 23:00，補彰化抽驗4件及由豐將檢驗結果。
-const S_v141={
-  changhua:'https://www.chshb.gov.tw/node/219120019',
-  taichung:'https://www.fda.gov.tw/TC/csmnewsContent.aspx?id=t634625&mid=267',
-  cnaNantou:'https://www.cna.com.tw/news/ahel/202608200149.aspx',
-  cnaChanghua:'https://www.cna.com.tw/news/aloc/202608210142.aspx'
-};
-const yufeng=camellia.find(x=>x.brand==='由豐'&&x.name==='將苦茶油（100%）');
-if(yufeng){
-  Object.assign(yufeng,{
-    date:'2028/07/02',
-    status:'red',
-    note:'250ml／瓶；臺中市食安處抽驗檢出苯駢芘 2.1 ppb，超過 2.0 ppb 限量。該批共72瓶，已售44瓶；庫存28瓶中4瓶抽驗、剩餘24瓶停售，另有73瓶不同批號預防性下架待銷毀。',
-    source:S_v141.taichung
-  });
+// v1.40：將官方下游強制下架清單接入中聯油查詢。
+// 保留既有產品查詢資料，新增資料列僅在中聯油查詢頁使用。
+union.push(...downstreamMandatoryList.map(row => ({
+  brand: row.operatorName,
+  name: row.productName,
+  batch: row.productBatchRaw,
+  date: row.expiryDateRaw,
+  status: 'yellow',
+  note: `官方下游業者清單列為強制性下架範圍。品項：${row.productName}；批號：${row.productBatchRaw}；請依主管機關最新公告處理。`,
+  source: S.union,
+  downstream: true,
+  countyCity: row.countyCity,
+  sourcePage: row.sourcePage,
+  sourceNote: row.sourceNote
+})));
+
+function lookup(records,isC,val){
+  const q=norm(val??document.querySelector('#q').value);
+  if(!q)return;
+  const hit=records.find(x=>[
+    x.name,x.brand,x.barcode,x.date,x.batch,x.countyCity
+  ].some(v=>norm(v).includes(q)));
+  document.querySelector('#help').hidden=true;
+  const box=document.querySelector('#result');
+  if(!hit){box.innerHTML='<section class="result white"><h2>沒有找到相符紀錄</h2><p>這不代表商品一定安全，也可能是條碼尚未收錄或公告資料未提供條碼。請再核對品名、業者、日期／批號與主管機關最新公告。</p></section>';return}
+  const cls=hit.dates?'yellow':hit.status;
+  box.innerHTML=`<section class="result ${cls}" id="resultCard"><h2>${hit.brand}｜${hit.name}</h2>${hit.countyCity?`<p><b>縣市：</b>${hit.countyCity}</p>`:''}${hit.batch?`<p><b>批號：</b>${hit.batch}</p>`:''}${hit.date?`<p><b>有效日期／範圍：</b>${hit.date}</p>`:''}${hit.sourcePage?`<p><b>官方清單頁碼：</b>${hit.sourcePage}</p>`:''}${hit.dates?`<label class="dateInput"><b>輸入瓶身有效日期</b><input id="d" maxlength="8" inputmode="numeric" placeholder="例如 20270725"></label>`:''}<p id="note">${hit.note}</p>${hit.source?`<a href="${hit.source}" target="_blank" rel="noreferrer">查看公告來源 ↗</a>`:'<p>資料來源連結待補；處置以主管機關最新公告為準。</p>'}</section>`;
+  if(hit.dates)document.querySelector('#d').oninput=e=>{e.target.value=e.target.value.replace(/\D/g,'').slice(0,8);if(e.target.value.length===8){const ok=hit.dates.includes(e.target.value),card=document.querySelector('#resultCard');card.className='result '+(ok?'red':'green');document.querySelector('#note').textContent=ok?'這個有效日期符合公告下架範圍，請先停止食用並保留原包裝。':'這個有效日期未列入目前公告的下架日期範圍。'}};
 }
-camellia.push(
-  {brand:'富香',name:'純100%苦茶油',date:'2028.08.03',status:'red',note:'510公克±5%；彰化縣衛生局抽驗檢出苯駢芘 2.1 μg/kg，油品來源為雲林縣協億油行，已責令下架回收。',source:S_v141.changhua},
-  {brand:'南投縣農會食品加工廠',name:'100%冷壓苦茶油',date:'2028.05.05',status:'red',note:'500ml；彰化縣衛生局抽驗檢出苯駢芘 3.6 μg/kg，油品來源為南投縣農會食品加工廠，已責令下架回收。',source:S_v141.changhua},
-  {brand:'松鼎',name:'高山苦茶油',date:'20271212',status:'red',note:'500ml；彰化縣衛生局抽驗檢出苯駢芘 2.9 μg/kg，負責廠商為雲林縣松鼎實業股份有限公司，已責令下架回收。',source:S_v141.changhua},
-  {brand:'祥記',name:'100%頂級茶仔油（又名苦茶油）',date:'2029.01.05',status:'red',note:'500毫升；彰化縣衛生局抽驗檢出苯駢芘 5.6 μg/kg，負責廠商為臺北市崇贏實業股份有限公司，已責令下架回收。',source:S_v141.changhua}
-);
-timeline.push(
-  ['8/20','alert','彰化抽驗結果','彰化縣抽驗22件市售苦茶油，4件苯駢芘超標','彰化縣衛生局公布抽驗結果，富香純100%苦茶油、100%冷壓苦茶油、松鼎高山苦茶油、祥記100%頂級茶仔油檢出 2.1–5.6 μg/kg，均移請製造商與油品來源所轄衛生局調查並責令下架回收。',S_v141.changhua,'彰化縣衛生局'],
-  ['8/22','alert','追查確認・下架回收','由豐將苦茶油（100%）檢出苯駢芘超標','臺中市食安處追查德昌商號上游原料時，確認金品芳同批中國青山茶籽委由協昌油行代工的由豐將苦茶油（100%）檢出 2.1 ppb；該批共72瓶，已售44瓶，相關產品下架回收。',S_v141.taichung,'臺中市政府衛生局／食藥署轉載']
-);
-function patchV141(){
-  if(location.hash==='#/camellia-check')checker('camellia-check');
-  if(location.hash==='#/camellia')story();
-  document.querySelectorAll('.date').forEach(el=>{if(!el.closest('.reportPage'))el.textContent=el.closest('.storyTop')?'v1.41・資料至 2026.08.24 23:00':'資料至 2026.08.24 23:00'});
-  document.querySelectorAll('.footer span:last-child').forEach(el=>{if(!el.closest('.reportPage'))el.textContent='v1.41　更新 2026.08.24'});
-  document.querySelectorAll('.eventCard h3,.eventCard p').forEach(el=>{if(!el.dataset.rich){el.innerHTML=rich(el.textContent);el.dataset.rich='1'}});
-}
-addEventListener('hashchange',()=>setTimeout(patchV141,0));
-patchV141();
