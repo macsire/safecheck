@@ -19,8 +19,8 @@ const unionTimeline=[
 ['8/4','judicial','第四波搜索','專案小組完成第4波搜索，案件進入偵結階段','臺中地檢署後續說明，專案小組於8月4日執行第4波搜索；四波搜索共扣得手機26支、電腦主機、硬碟、隨身碟、製程文件及檢驗報告等證物。','https://www.tcc.moj.gov.tw/295804/295830/657577/1429734/post','臺中地檢署'],
 ['8/18','judicial','偵查終結・起訴','4家公司、15名自然人共19名被告遭起訴','檢方認定中聯製造7批、合計8,478.88公噸苯駢芘超標沙拉油，並指控中聯放寬黃豆熱損粒進料標準、下游企業知情後未停售回收通報；對6名核心決策高層求處食安法最重7年、併科8,000萬元罰金，另聲請沒收及追徵約8億8,731萬元犯罪所得。','https://www.tcc.moj.gov.tw/295804/295830/657577/1429734/post','臺中地檢署']
 ];
-const app=document.querySelector('#app'); const topbar=()=>`<header class="topbar"><div class="brand"><span>家庭食用油安全專題</span></div><span class="date">資料至 2026.08.06</span></header>`;
-function home(){app.innerHTML=`<main class="shell">${topbar()}<section class="hero"><p class="kicker">家庭食用油安全專題</p><h1>家庭食用油<br><span class="issueUnderline">問題批號</span>快查</h1><div class="privacyPromise" aria-label="隱私與使用承諾"><span>不紀錄個資</span><span>免登入</span><span>無需讀取發票載具</span></div></section><section class="branchGrid">${branch('camellia','2026 苦茶油事件','苦茶油事件','比對問題油品，或查看抽驗與追查時序')}${branch('union','2026 中聯油脂事件','中聯油事件','比對受影響商品、日期與批號')}</section><section class="how"><h2>如何使用本網頁</h2><div><b>1</b><p><strong>先選事件</strong><br>中聯油、苦茶油分開整理，不把不同供應鏈混在一起。</p></div><div><b>2</b><p><strong>掃條碼或輸入資料</strong><br>依手上商品的條碼、品名、日期或批號快速比對。</p></div><div><b>3</b><p><strong>最後看官方公告</strong><br>本網站協助快速整理；實際下架、回收範圍仍以主管機關最新公告為準。</p></div></section><footer class="footer"><span><strong>資料來源</strong>：食藥署、地方政府發布內容，另參考近日媒體。</span><span>v1.3・非政府官方網站</span></footer></main>`}
+const app=document.querySelector('#app'); const topbar=()=>`<header class="topbar"><div class="brand"><span>家庭食用油安全專題</span></div><span class="date">資料至 2026.08.29</span></header>`;
+function home(){app.innerHTML=`<main class="shell">${topbar()}<section class="hero"><p class="kicker">家庭食用油安全專題</p><h1>家庭食用油<br><span class="issueUnderline">問題批號</span>快查</h1><div class="privacyPromise" aria-label="隱私與使用承諾"><span>不紀錄個資</span><span>免登入</span><span>無需讀取發票載具</span></div></section><section class="branchGrid">${branch('camellia','2026 苦茶油事件','苦茶油事件','比對問題油品，或查看抽驗與追查時序')}${branch('union','2026 中聯油脂事件','中聯油事件','比對受影響商品、日期與批號')}</section><section class="how"><h2>如何使用本網頁</h2><div><b>1</b><p><strong>先選事件</strong><br>中聯油、苦茶油分開整理，不把不同供應鏈混在一起。</p></div><div><b>2</b><p><strong>掃條碼或輸入資料</strong><br>依手上商品的條碼、品名、日期或批號快速比對。</p></div><div><b>3</b><p><strong>最後看官方公告</strong><br>本網站協助快速整理；實際下架、回收範圍仍以主管機關最新公告為準。</p></div></section><footer class="footer"><span><strong>資料來源</strong>：食藥署、地方政府發布內容，另參考近日媒體。</span><span>v1.41・非政府官方網站</span></footer></main>`}
 function branch(key,eyebrow,title,desc){const more=key==='camellia'?`<div class="morePrompt">想了解更多？</div><div class="storyLinks"><a href="#/camellia">事件時序表　→</a><a href="report.html">我們的整理　→</a></div>`:`<a class="storyAction" href="#/union-timeline"><span>想了解更多？點我閱讀！</span><span>→</span></a>`;return `<article class="branch ${key}"><div class="branchHead"><span class="branchDot"></span><div><p>${eyebrow}</p><h2>${title}</h2></div></div><p class="branchDesc">${desc}</p><a class="scanAction" href="#/${key==='union'?'union':'camellia-check'}"><span class="scanIcon">⌗</span><span><b>直接掃條碼比對</b><small>查看手上的油是否在事件名單內</small></span><i>→</i></a>${more}</article>`}
 function checker(kind){const isC=kind==='camellia-check',records=isC?camellia:union,event=isC?'苦茶油事件':'中聯油事件',sub=isC?'掃描或輸入手上商品資料，快速比對目前已公開的問題油品。':'掃描條碼或輸入商品資料；依食藥署 2026/07/23 公告清單核對有效日期。';app.innerHTML=`<main class="check ${isC?'camellia':''}"><header class="topbar"><a class="back" href="#/">← 首頁</a><span class="date">資料至 2026.08.06</span></header><section class="checkHero"><p>家庭食用油安全專題</p><h1>${event}</h1><span>${sub}</span></section><section class="panel"><button class="cameraBtn" id="camera">⌗　開啟相機掃條碼<small>對準包裝上的商品條碼</small></button><div class="or">或</div><form id="form"><label>輸入條碼或商品名稱</label><div class="query"><input id="q" placeholder="例如：商品名稱、有效日期"><button>查詢</button></div></form></section><div id="result"></div><section class="help" id="help"><h2>查詢結果怎麼看？</h2><div class="statusList"><span class="status red"><i></i>紅色</span><p>公告列為問題商品或不合格批次，請停止食用並依公告處理。</p><span class="status yellow"><i></i>黃色</span><p>商品可能涉及事件，但仍需再核對日期、批號或公告內容。</p><span class="status green"><i></i>綠色</span><p>在已收錄資料中可明確排除的日期／批次。</p><span class="status white"><i></i>白色</span><p>目前名單沒有相符紀錄；不等於網站替商品背書安全。</p></div></section><footer class="checkFooter">本頁為資料整理工具，實際回收與處置以主管機關最新公告為準。</footer></main>`;document.querySelector('#form').onsubmit=e=>{e.preventDefault();lookup(records,isC)};document.querySelector('#camera').onclick=()=>openCamera(records,isC)}
 function norm(s){return String(s||'').toLowerCase().replace(/\s+/g,'')}function lookup(records,isC,val){const q=norm(val??document.querySelector('#q').value);if(!q)return;const hit=records.find(x=>[x.name,x.brand,x.barcode,x.date].some(v=>norm(v).includes(q)));document.querySelector('#help').hidden=true;const box=document.querySelector('#result');if(!hit){box.innerHTML=`<section class="result white"><h2>沒有找到相符紀錄</h2><p>這不代表商品一定安全，也可能是條碼尚未收錄或公告資料未提供條碼。請再核對品名、日期／批號與主管機關最新公告。</p></section>`;return}const cls=hit.dates?'yellow':hit.status;box.innerHTML=`<section class="result ${cls}" id="resultCard"><h2>${hit.brand}｜${hit.name}</h2>${hit.date?`<p><b>有效日期：</b>${hit.date}</p>`:''}${hit.dates?`<label class="dateInput"><b>輸入瓶身有效日期</b><input id="d" maxlength="8" inputmode="numeric" placeholder="例如 20270725"></label>`:''}<p id="note">${hit.note}</p><a href="${hit.source}" target="_blank" rel="noreferrer">查看公告來源 ↗</a></section>`;if(hit.dates)document.querySelector('#d').oninput=e=>{e.target.value=e.target.value.replace(/\D/g,'').slice(0,8);if(e.target.value.length===8){const ok=hit.dates.includes(e.target.value),card=document.querySelector('#resultCard');card.className='result '+(ok?'red':'green');document.querySelector('#note').textContent=ok?'這個有效日期符合公告下架範圍，請先停止食用並保留原包裝。':'這個有效日期未列入目前公告的下架日期範圍。'}}}
@@ -43,7 +43,7 @@ function lookup(records,isC,val){const q=norm(val??document.querySelector('#q').
 function polish(){document.querySelectorAll('.back').forEach(a=>a.textContent='家庭食用油安全專題・回到首頁');document.querySelectorAll('.date').forEach(el=>el.textContent=el.closest('.storyTop')?'v1.37a・資料至 2026.08.15':'資料至 2026.08.15');if(location.hash==='#/camellia'){const lane=document.querySelector('.lanes .lane:last-child p');if(lane)lane.textContent='臺南主動抽驗 → 8/3 驗出另外 3 件超標，後續由嘉義、臺北、臺中追查與下架。目前沒有官方證據可將這些案件併入威加／源春，或證實與中聯油脂供應鏈有關。';const footer=document.querySelector('.footer span:last-child');if(footer)footer.textContent='v1.37a　更新 2026.08.15'}}
 route();
 // v1.37 全站整合：以最新產品批次資料同步兩條事件線，並在兩個時序頁套用品牌／產品字重。
-function rich(text){return String(text).replace(/(泰山|福壽|福懋|中聯油脂|南僑|連淨|永豐餘生技|國際機能食品|威加|源春|聚興製油工廠|德昌商號|宮北合作農場|百年堂|鑫隆發|由豐|金品芳|協昌油行|富香|協億油行|南投縣農會食品加工廠|松鼎|松鼎實業|祥記|崇贏實業|庭茂農業生技|麻油車|統購實業|南投縣信義鄉農會|再源油品興業)/g,'<strong class="brandName">$1</strong>').replace(/(315-1150404 大豆沙拉油|好理調合油|大豆沙拉油|精選蔬菜油|苦茶油|在地金花小菓苦茶油|台灣苦茶油|極品苦茶油|東山苦茶油|頂級冷壓苦茶油|由豐將苦茶油（100%）|富香純100%苦茶油|100%冷壓苦茶油|松鼎高山苦茶油|祥記100%頂級茶仔油)/g,'<span class="productName">$1</span>')}
+function rich(text){return String(text).replace(/(泰山|福壽|福懋|中聯油脂|南僑|連淨|永豐餘生技|國際機能食品|威加|源春|聚興製油工廠|德昌商號|宮北合作農場|百年堂|鑫隆發|由豐|庭茂農業生技|麻油車|統購實業)/g,'<strong class="brandName">$1</strong>').replace(/(315-1150404 大豆沙拉油|好理調合油|大豆沙拉油|精選蔬菜油|苦茶油|在地金花小菓苦茶油|台灣苦茶油|極品苦茶油|東山苦茶油|頂級冷壓苦茶油)/g,'<span class="productName">$1</span>')}
 camellia[4]={brand:'庭茂農業生技',name:'極品苦茶油',date:'2028/02/22',status:'red',note:'8/7 官方抽驗確認苯駢芘超標，停止食用並依公告處理。',source:S.aug};
 camellia.push({brand:'翰霖貿易',name:'苦茶油',date:'2028/01/21',status:'red',note:'業者自主通報苯駢芘 2.1 μg/kg；列為已確認不合格，依公告處理。',source:S.aug});
 function patchSite(){
@@ -84,61 +84,42 @@ function patchV140(){
 addEventListener('hashchange',()=>setTimeout(patchV140,0));
 patchV140();
 
-// v1.41：追平至 2026/08/24 23:00，補彰化抽驗4件及由豐將檢驗結果。
+// v1.41：同步 8/21–8/29 彰化、臺中、嘉義及食藥署最新油品公告。
 const S_v141={
-  changhua:'https://www.chshb.gov.tw/node/219120019',
+  changhua:'https://www.fda.gov.tw/TC/csmnewsContent.aspx?id=t634617&mid=267',
   taichung:'https://www.fda.gov.tw/TC/csmnewsContent.aspx?id=t634625&mid=267',
-  cnaNantou:'https://www.cna.com.tw/news/ahel/202608200149.aspx',
-  cnaChanghua:'https://www.cna.com.tw/news/aloc/202608210142.aspx'
+  chiayi:'https://www.fda.gov.tw/tc/csmnewsContent.aspx?id=t634634&mid=267',
+  tainanSesame:'https://www.fda.gov.tw/tc/csmnewsContent.aspx?id=t634637&mid=267',
+  sesame:'https://www.fda.gov.tw/TC/newsContent.aspx?cid=4&id=t634638',
+  spring:'https://www.fda.gov.tw/tc/csmnewsContent.aspx?id=t634643&mid=267',
+  national:'https://www.fda.gov.tw/TC/newsContent.aspx?cid=4&id=t634636',
+  imei:'https://www.imeifoods.com.tw/lab/news2.html'
 };
-const yufeng=camellia.find(x=>x.brand==='由豐'&&x.name==='將苦茶油（100%）');
-if(yufeng){
-  Object.assign(yufeng,{
-    date:'2028/07/02',
-    status:'red',
-    note:'250ml／瓶；臺中市食安處抽驗檢出苯駢芘 2.1 ppb，超過 2.0 ppb 限量。該批共72瓶，已售44瓶；庫存28瓶中4瓶抽驗、剩餘24瓶停售，另有73瓶不同批號預防性下架待銷毀。',
-    source:S_v141.taichung
-  });
-}
+
 camellia.push(
-  {brand:'富香',name:'純100%苦茶油',date:'2028.08.03',status:'red',note:'510公克±5%；彰化縣衛生局抽驗檢出苯駢芘 2.1 μg/kg，油品來源為雲林縣協億油行，已責令下架回收。',source:S_v141.changhua},
-  {brand:'南投縣農會食品加工廠',name:'100%冷壓苦茶油',date:'2028.05.05',status:'red',note:'500ml；彰化縣衛生局抽驗檢出苯駢芘 3.6 μg/kg，油品來源為南投縣農會食品加工廠，已責令下架回收。',source:S_v141.changhua},
-  {brand:'松鼎',name:'高山苦茶油',date:'20271212',status:'red',note:'500ml；彰化縣衛生局抽驗檢出苯駢芘 2.9 μg/kg，負責廠商為雲林縣松鼎實業股份有限公司，已責令下架回收。',source:S_v141.changhua},
-  {brand:'祥記',name:'100%頂級茶仔油（又名苦茶油）',date:'2029.01.05',status:'red',note:'500毫升；彰化縣衛生局抽驗檢出苯駢芘 5.6 μg/kg，負責廠商為臺北市崇贏實業股份有限公司，已責令下架回收。',source:S_v141.changhua}
+  {brand:'富香純',name:'100%苦茶油',date:'2028/08/03',status:'red',note:'彰化縣衛生局抽驗檢出苯駢芘 2.1 μg/kg，超過 2.0 μg/kg 限量；油品來源為雲林縣協億油行，已責令下架回收。',source:S_v141.changhua},
+  {brand:'南投縣農會食品加工廠',name:'100%冷壓苦茶油',date:'2028/05/05',status:'red',note:'彰化縣衛生局抽驗檢出苯駢芘 3.6 μg/kg，超過 2.0 μg/kg 限量，已責令下架回收。此批與信義鄉農會 2027/03/19、2027/05/06 兩批產品分開列載。',source:S_v141.changhua},
+  {brand:'松鼎實業',name:'松鼎高山苦茶油',date:'2027/12/12',status:'red',note:'彰化縣衛生局抽驗檢出苯駢芘 2.9 μg/kg，超過 2.0 μg/kg 限量，已責令下架回收。',source:S_v141.changhua},
+  {brand:'崇贏實業',name:'祥記100%頂級茶仔油（又名苦茶油）',date:'2029/01/05',status:'red',note:'彰化縣衛生局抽驗檢出苯駢芘 5.6 μg/kg，超過 2.0 μg/kg 限量，已責令下架回收。',source:S_v141.changhua},
+  {brand:'金品芳／由豐將',name:'苦茶油（100%）',date:'2028/07/02',status:'red',note:'臺中市食安處抽驗檢出苯駢芘 2.1 ppb，確定不符合限量；共72瓶，已售44瓶，庫存24瓶停售，另有不同批號73瓶預防性下架。',source:S_v141.taichung},
+  {brand:'麻油車／統購實業',name:'冷壓黑麻油',date:'2028/04/06、2028/05/03、2028/06/24',dates:['20280406','20280503','20280624'],status:'red',note:'統購實業製造，檢出苯駢芘 3.2 μg/kg，超過 2.0 μg/kg 限量；食藥署查明同批製程涉及3個效期、共360瓶，均出貨至聖德科斯，已下架回收。',source:S_v141.sesame},
+  {brand:'春木製油',name:'苦茶油',date:'待公告',status:'red',note:'業者自主送驗檢出苯駢芘 23.0 μg/kg，超過 2.0 μg/kg 限量；彰化縣衛生局命停工、下架回收並封存苦茶籽，產品效期與批號待官方補充。',source:S_v141.spring}
 );
+
 timeline.push(
-  ['8/20','alert','彰化抽驗結果','彰化縣抽驗22件市售苦茶油，4件苯駢芘超標','彰化縣衛生局公布抽驗結果，富香純100%苦茶油、100%冷壓苦茶油、松鼎高山苦茶油、祥記100%頂級茶仔油檢出 2.1–5.6 μg/kg，均移請製造商與油品來源所轄衛生局調查並責令下架回收。',S_v141.changhua,'彰化縣衛生局'],
-  ['8/22','alert','追查確認・下架回收','由豐將苦茶油（100%）檢出苯駢芘超標','臺中市食安處追查德昌商號上游原料時，確認金品芳同批中國青山茶籽委由協昌油行代工的由豐將苦茶油（100%）檢出 2.1 ppb；該批共72瓶，已售44瓶，相關產品下架回收。',S_v141.taichung,'臺中市政府衛生局／食藥署轉載']
+  ['8/20–21','alert','彰化擴大抽驗・下架回收','22件苦茶油中4件苯駢芘超標','彰化縣衛生局抽驗22件市售苦茶油，4件檢出2.1–5.6 μg/kg，均已移請相關衛生局調查並責令下架回收。',S_v141.changhua,'彰化縣衛生局'],
+  ['8/22','alert','臺中抽驗・流向追查','由豐將苦茶油（100%）檢出2.1 ppb','金品芳食品委託協昌油行代工的由豐將苦茶油（有效日期2028/07/02）檢出超標；72瓶中44瓶已售，24瓶庫存停售，另73瓶不同批號預防性下架。',S_v141.taichung,'臺中市食品藥物安全處'],
+  ['8/24–27','alert','嘉義麻油案・下架回收','麻油車冷壓黑麻油檢出3.2 μg/kg','統購實業製造的冷壓黑麻油（有效日期2028/04/06、05/03、06/24）共360瓶，均出貨聖德科斯；嘉義市衛生局要求停產、停止販售並回收。',S_v141.sesame,'食藥署 8/27 說明'],
+  ['8/27–28','alert','彰化自主送驗・停工封存','春木製油苦茶油檢出23.0 μg/kg','春木製油自主送驗發現苯駢芘23.0 μg/kg。彰化縣衛生局命停工、下架回收並封存苦茶籽；污染究竟來自原料或製程，仍待調查。',S_v141.spring,'彰化縣衛生局'],
+  ['8/26–29','trace','全國統計・風險追查','問題製油廠累計15家，初步整理四類可能風險','截至8/26地方共抽驗658件，另有14件苦茶油不合格；食藥署與業者交流後，初步提出原料乾燥、原料型態、焙炒及局部過熱、設備殘渣反覆受熱等可能風險，尚非個案污染原因的最終認定。',S_v141.national,'食藥署 8/26 公告']
 );
+
 function patchV141(){
+  document.querySelectorAll('.date').forEach(el=>{if(!el.closest('.reportPage'))el.textContent='v1.41・資料至 2026.08.29'});
+  document.querySelectorAll('.footer span:last-child').forEach(el=>{if(!el.closest('.reportPage'))el.textContent='v1.41　更新 2026.08.29'});
   if(location.hash==='#/camellia-check')checker('camellia-check');
   if(location.hash==='#/camellia')story();
-  document.querySelectorAll('.date').forEach(el=>{if(!el.closest('.reportPage'))el.textContent=el.closest('.storyTop')?'v1.41・資料至 2026.08.24 23:00':'資料至 2026.08.24 23:00'});
-  document.querySelectorAll('.footer span:last-child').forEach(el=>{if(!el.closest('.reportPage'))el.textContent='v1.41　更新 2026.08.24'});
   document.querySelectorAll('.eventCard h3,.eventCard p').forEach(el=>{if(!el.dataset.rich){el.innerHTML=rich(el.textContent);el.dataset.rich='1'}});
 }
 addEventListener('hashchange',()=>setTimeout(patchV141,0));
 patchV141();
-
-// 下游強制性下架清單接入中聯油查詢。
-union.push(...downstreamMandatoryList.map(row => ({
-  brand: row.operatorName,
-  name: row.productName,
-  batch: row.productBatchRaw,
-  date: row.expiryDateRaw,
-  status: 'yellow',
-  note: `官方下游業者清單列為強制性下架範圍。品項：${row.productName}；批號：${row.productBatchRaw}；請依主管機關最新公告處理。`,
-  source: S.union,
-  countyCity: row.countyCity,
-  sourcePage: row.sourcePage
-})));
-
-function lookup(records,isC,val){
-  const q=norm(val??document.querySelector('#q').value); if(!q)return;
-  const hit=records.find(x=>[x.name,x.brand,x.barcode,x.date,x.batch,x.countyCity].some(v=>norm(v).includes(q)));
-  document.querySelector('#help').hidden=true; const box=document.querySelector('#result');
-  if(!hit){box.innerHTML='<section class="result white"><h2>沒有找到相符紀錄</h2><p>這不代表商品一定安全，也可能是條碼尚未收錄或公告資料未提供條碼。請再核對品名、業者、日期／批號與主管機關最新公告。</p></section>';return}
-  const cls=hit.dates?'yellow':hit.status;
-  box.innerHTML=`<section class="result ${cls}" id="resultCard"><h2>${hit.brand}｜${hit.name}</h2>${hit.countyCity?`<p><b>縣市：</b>${hit.countyCity}</p>`:''}${hit.batch?`<p><b>批號：</b>${hit.batch}</p>`:''}${hit.date?`<p><b>有效日期／範圍：</b>${hit.date}</p>`:''}${hit.sourcePage?`<p><b>官方清單頁碼：</b>${hit.sourcePage}</p>`:''}${hit.dates?`<label class="dateInput"><b>輸入瓶身有效日期</b><input id="d" maxlength="8" inputmode="numeric" placeholder="例如 20270725"></label>`:''}<p id="note">${hit.note}</p>${hit.source?`<a href="${hit.source}" target="_blank" rel="noreferrer">查看公告來源 ↗</a>`:'<p>資料來源連結待補；處置以主管機關最新公告為準。</p>'}</section>`;
-  if(hit.dates)document.querySelector('#d').oninput=e=>{e.target.value=e.target.value.replace(/\D/g,'').slice(0,8);if(e.target.value.length===8){const ok=hit.dates.includes(e.target.value),card=document.querySelector('#resultCard');card.className='result '+(ok?'red':'green');document.querySelector('#note').textContent=ok?'這個有效日期符合公告下架範圍，請先停止食用並保留原包裝。':'這個有效日期未列入目前公告的下架日期範圍。'}};
-}
