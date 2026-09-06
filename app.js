@@ -28,7 +28,7 @@ async function openCamera(records,isC){if(!navigator.mediaDevices?.getUserMedia)
 function story(){const events=timeline.map(x=>`<article class="event ${x[1]}"><div class="eventDate">${x[0]}</div><div class="eventCard"><span class="tag">${x[2]}</span><h3>${x[3]}</h3><p>${x[4]}</p><a href="${x[5]}" target="_blank" rel="noreferrer">資料來源｜${x[6]} ↗</a></div></article>`).join('');app.innerHTML=`<main><header class="storyTop"><a class="back" href="#/">← 首頁</a><span class="date">v1.1・資料至 2026.08.06</span></header><section class="storyHero"><p class="kicker">2026 苦茶油事件</p><h1>一瓶超標苦茶油，<br>後來查出了什麼？</h1><p>從 7 月 21 日第一起自主通報開始，把檢驗、下架、供應鏈與司法追查分開看。這不是單一廠商一路擴散的故事。</p></section><section class="note"><h2>小提醒：不檢驗不公告的縣市可能更危險</h2><p>我們把「政府監管行動」和「檢驗出問題」用不同的顏色呈現。誰主動抽驗、誰公開結果，畫面上自然會出現較多紀錄，大家應該鼓勵地方政府主動查驗並公告問題油，而不是把「查得勤」誤讀成「出包多」，打擊有做事的人。</p></section><section class="timelineSection"><div class="sectionHead"><div><p class="kicker">事件時序</p><h2>從通報到擴大追查</h2></div><div class="legend"><span><i class="dot actionDot"></i>監管行動</span><span><i class="dot alertDot"></i>超標／問題商品</span><span><i class="dot traceDot"></i>供應鏈追查</span><span><i class="dot judicialDot"></i>司法偵查</span></div></div><div class="timeline">${events}</div></section><section class="lanes"><h2>目前至少分成三條事件線</h2><div class="laneGrid"><article class="lane"><h3>連淨線</h3><p>連淨自主通報 → 通路下架回收。苦茶籽原料與製程污染來源仍須分開判讀。</p></article><article class="lane"><h3>威加／源春線</h3><p>永豐餘自主通報 → 威加下單 → 源春製油 → 多項產品。8/4 進入刑事偵查。</p></article><article class="lane"><h3>地方擴大抽驗線</h3><p>臺南主動抽驗 → 8/3 驗出另外 3 件超標。目前沒有官方證據可直接併入威加／源春供應鏈。</p></article></div></section><section class="method"><p class="kicker">閱讀原則</p><h2>已證實、業者說法、偵查疑點，分開寫。</h2><p>本頁以食藥署、地方衛生局與檢察機關公開資料為基準。偵查中的「疑似混充」不等同法院已認定；不同地方政府的抽驗量也不能直接拿來當各地風險排名。</p><div class="sources"><a href="${S.start}" target="_blank">食藥署｜連淨案</a><a href="${S.aug}" target="_blank">食藥署｜8/1 調查說明</a><a href="${S.tainan}" target="_blank">臺南市衛生局｜擴大抽驗</a><a href="${S.pros}" target="_blank">臺北地檢署｜8/4 新聞稿</a></div></section><footer class="footer"><span>家庭食用油安全專題・苦茶油事件</span><span>v1.1　更新 2026.08.06</span></footer></main>`}
 function unionStory(){const events=unionTimeline.map(x=>`<article class="event ${x[1]}"><div class="eventDate">${x[0]}</div><div class="eventCard"><span class="tag">${x[2]}</span><h3>${x[3]}</h3><p>${x[4]}</p><a href="${x[5]}" target="_blank" rel="noreferrer">資料來源｜${x[6]} ↗</a></div></article>`).join('');app.innerHTML=`<main class="unionStory"><header class="storyTop"><a class="back" href="#/">← 首頁</a><span class="date">v1.3・資料至 2026.08.06</span></header><section class="storyHero"><p class="kicker">2026 中聯油脂事件</p><h1>中聯這桶問題油，<br>為何拖了這麼久才被通報？</h1><p>把「驗出異常」、「供應鏈知情」和「正式通報政府」拆開，時間差就很清楚：5 月中已經出現超標結果，6 月中供應鏈內部已談到問題，主管機關卻到 6 月 30 日才收到正式通報。</p></section><section class="delayBox"><div><strong>5/13</strong><span>第一份已知超標結果</span></div><b>→ 48 天 →</b><div><strong>6/30</strong><span>主管機關接獲通報</span></div></section><section class="note unionNote"><h2>先釐清一件事：股東身分 ≠ 已證明更早知情</h2><p>泰山、福壽、福懋與中聯關係密切，但不能只靠股權關係倒推「5/13 就知道」。目前公開資料可以直接證實的是：福壽 6/10 收到南僑通知、6/11 通知中聯；主管機關並確認泰山在 6/15 的品保聯繫會議已知悉問題。這些才是本頁採用的知情節點。</p></section><section class="timelineSection"><div class="sectionHead"><div><p class="kicker">事件時序</p><h2>警訊怎麼一路卡了 48 天</h2></div><div class="legend"><span><i class="dot warningDot"></i>異常／知情</span><span><i class="dot testingDot"></i>複驗</span><span><i class="dot officialDot"></i>正式通報</span><span><i class="dot actionDot"></i>政府處置</span></div></div><div class="timeline">${events}</div></section><section class="gapSection"><p class="kicker">真正值得追問的空白</p><h2>不是只有 6/29 到 6/30 的一天。</h2><div class="gapGrid"><article><strong>28 天</strong><h3>5/13 → 6/10</h3><p>南僑已取得超標結果，到通知福壽之間隔了約四週。公開資料已確認延遲通報，但目前不足以替這段等待補上一個未證實的理由。</p></article><article><strong>19 天</strong><h3>6/11 → 6/30</h3><p>中聯已接到問題訊息，之後歷經兩次送驗才正式通報。主管機關認定這段過程構成延遲，並對中聯裁罰。</p></article><article><strong>15 天</strong><h3>6/15 → 6/30</h3><p>泰山已在品保聯繫會議知悉問題，卻未立即通報；7/1 接受稽查時又未完整揭露處理過程，最後兩項合計裁罰 600 萬元。</p></article></div></section><section class="method"><p class="kicker">閱讀原則</p><h2>公司的說法，和主管機關查到的事實分開看。</h2><p>本頁以食藥署、地方衛生機關調查與可交叉核對的公開報導為主。企業「自行複驗後才確認」是其處理流程，不等同於主管機關認定可以延後法定通報。</p><div class="sources"><a href="${S.unionFirst}" target="_blank">食藥署｜7/1 首波公告</a><a href="${S.unionUpdate}" target="_blank">食藥署｜7/12 追查進度</a><a href="${S.unionTrace}" target="_blank">中央社｜衛福部完整時序</a><a href="${S.unionPenalty}" target="_blank">中央社｜彰化縣裁罰泰山</a></div></section><footer class="footer"><span>家庭食用油安全專題・中聯油脂事件</span><span>v1.3　更新 2026.08.06</span></footer></main>`}
 function polish(){document.querySelectorAll('.back').forEach(a=>a.textContent='家庭食用油安全專題・回到首頁');document.querySelectorAll('.storyTop .date').forEach(el=>el.textContent='v1.3・資料至 2026.08.06');const storyVersion=document.querySelector('.storyTop~section~.footer span:last-child');if(storyVersion)storyVersion.textContent='v1.3　更新 2026.08.06'}
-function route(){const p=location.hash.replace(/^#\/?/,'');if(p==='union'||p==='camellia-check')checker(p);else if(p==='camellia')story();else if(p==='union-timeline')unionStory();else home();polish();scrollTo(0,0)}addEventListener('hashchange',route);route();
+function route(){const p=location.hash.replace(/^#\/?/,'');if(p==='union'||p==='camellia-check')checker(p);else if(p==='camellia')story();else if(p==='union-timeline')unionStory();else home();polish();scrollTo(0,0)}
 
 // v1.32：資料庫更新後的苦茶油查詢與時序資料。
 camellia.push(
@@ -41,7 +41,7 @@ timeline.push(['8/8','action','跨縣市追查・下架','嘉義、臺北、臺�
 timeline.push(['8/14','alert','抽驗超標・全面預防性下架','麻油車頂級冷壓苦茶油檢出苯駢芘超標','桃園市抽驗統購實業供售的麻油車頂級冷壓苦茶油（有效日期2028/07/05），檢出苯駢芘2.1 μg/kg，超過2.0 μg/kg限量；臺北市衛生局要求統購公司苦茶油產品不分批號預防性下架，不得販售。',S.tea,'臺北市衛生局']);
 function lookup(records,isC,val){const q=norm(val??document.querySelector('#q').value);if(!q)return;const hit=records.find(x=>[x.name,x.brand,x.barcode,x.date,x.batch].some(v=>norm(v).includes(q)));document.querySelector('#help').hidden=true;const box=document.querySelector('#result');if(!hit){box.innerHTML=`<section class="result white"><h2>沒有找到相符紀錄</h2><p>這不代表商品一定安全，也可能是條碼尚未收錄或公告資料未提供條碼。請再核對品名、日期／批號與主管機關最新公告。</p></section>`;return}const cls=hit.dates?'yellow':hit.status;box.innerHTML=`<section class="result ${cls}" id="resultCard"><h2>${hit.brand}｜${hit.name}</h2>${hit.batch?`<p><b>批號：</b>${hit.batch}</p>`:''}${hit.date?`<p><b>有效日期／範圍：</b>${hit.date}</p>`:''}${hit.dates?`<label class="dateInput"><b>輸入瓶身有效日期</b><input id="d" maxlength="8" inputmode="numeric" placeholder="例如 20270725"></label>`:''}<p id="note">${hit.note}</p>${hit.source?`<a href="${hit.source}" target="_blank" rel="noreferrer">查看公告來源 ↗</a>`:'<p>資料來源連結待補；處置以主管機關最新公告為準。</p>'}</section>`;if(hit.dates)document.querySelector('#d').oninput=e=>{e.target.value=e.target.value.replace(/\D/g,'').slice(0,8);if(e.target.value.length===8){const ok=hit.dates.includes(e.target.value),card=document.querySelector('#resultCard');card.className='result '+(ok?'red':'green');document.querySelector('#note').textContent=ok?'這個有效日期符合公告下架範圍，請先停止食用並保留原包裝。':'這個有效日期未列入目前公告的下架日期範圍。'}}}
 function polish(){document.querySelectorAll('.back').forEach(a=>a.textContent='家庭食用油安全專題・回到首頁');document.querySelectorAll('.date').forEach(el=>el.textContent=el.closest('.storyTop')?'v1.37a・資料至 2026.08.15':'資料至 2026.08.15');if(location.hash==='#/camellia'){const lane=document.querySelector('.lanes .lane:last-child p');if(lane)lane.textContent='臺南主動抽驗 → 8/3 驗出另外 3 件超標，後續由嘉義、臺北、臺中追查與下架。目前沒有官方證據可將這些案件併入威加／源春，或證實與中聯油脂供應鏈有關。';const footer=document.querySelector('.footer span:last-child');if(footer)footer.textContent='v1.37a　更新 2026.08.15'}}
-route();
+
 // v1.37 全站整合：以最新產品批次資料同步兩條事件線，並在兩個時序頁套用品牌／產品字重。
 function rich(text){return String(text).replace(/(泰山|福壽|福懋|中聯油脂|南僑|連淨|永豐餘生技|國際機能食品|威加|源春|聚興製油工廠|德昌商號|宮北合作農場|百年堂|鑫隆發|由豐|庭茂農業生技|麻油車|統購實業)/g,'<strong class="brandName">$1</strong>').replace(/(315-1150404 大豆沙拉油|好理調合油|大豆沙拉油|精選蔬菜油|苦茶油|在地金花小菓苦茶油|台灣苦茶油|極品苦茶油|東山苦茶油|頂級冷壓苦茶油)/g,'<span class="productName">$1</span>')}
 camellia[4]={brand:'庭茂農業生技',name:'極品苦茶油',date:'2028/02/22',status:'red',note:'8/7 官方抽驗確認苯駢芘超標，停止食用並依公告處理。',source:S.aug};
@@ -58,8 +58,8 @@ function patchSite(){
   if(location.hash==='#/camellia'&&!document.querySelector('.camelliaReportLink')){const box=document.querySelector('.method .sources');if(box)box.insertAdjacentHTML('beforeend','<a class="camelliaReportLink" href="camellia-report.html">我們的整理 ↗</a>')}
   if(location.hash==='#/union-timeline'&&!document.querySelector('.unionReportLink')){const box=document.querySelector('.method .sources');if(box)box.insertAdjacentHTML('beforeend','<a class="unionReportLink" href="union-report.html">我們的整理 ↗</a>')}
 }
-addEventListener('hashchange',()=>setTimeout(patchSite,0));
-patchSite();
+
+
 
 // v1.40：新增南投信義鄉農會／彰化再源代工線，並保留上游追查的證據分層。
 const S_v140={
@@ -81,8 +81,8 @@ function patchV140(){
   if(location.hash==='#/camellia')story();
   document.querySelectorAll('.eventCard h3,.eventCard p').forEach(el=>{if(!el.dataset.rich){el.innerHTML=rich(el.textContent);el.dataset.rich='1'}});
 }
-addEventListener('hashchange',()=>setTimeout(patchV140,0));
-patchV140();
+
+
 
 // v1.41：同步 8/21–8/29 彰化、臺中、嘉義及食藥署最新油品公告。
 const S_v141={
@@ -121,5 +121,5 @@ function patchV141(){
   if(location.hash==='#/camellia')story();
   document.querySelectorAll('.eventCard h3,.eventCard p').forEach(el=>{if(!el.dataset.rich){el.innerHTML=rich(el.textContent);el.dataset.rich='1'}});
 }
-addEventListener('hashchange',()=>setTimeout(patchV141,0));
-patchV141();
+
+
