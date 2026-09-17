@@ -1,5 +1,5 @@
 /* A single router owns rendering; legacy records and article routes are retained. */
-const redesignMeta = {version:'v1.43',dataThrough:'2026/09/06 23:00',reviewed:'2026/09/06'};
+const redesignMeta = {version:'v1.44',dataThrough:'2026/09/08 23:00',reviewed:'2026/09/08'};
 const safeText = value => String(value ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function searchText(value){return String(value ?? '').normalize('NFKC').toLowerCase().replace(/[\s\-/.、（）()]/g,'')}
 function findRecords(records,query,date=''){
@@ -13,9 +13,9 @@ function scHeader(){return '<header class="sc-head"><a class="sc-brand" href="#/
 function home(){
 app.innerHTML=`<main class="sc">${scHeader()}
 <section class="sc-intro"><p class="sc-eyebrow">家庭食用油安全專題 / SAFECHECK</p><h1>家中的油，<em>先查再用。</em></h1><p>拿起油瓶，核對品牌、品名與有效日期。</p></section>
-<p class="sc-stage">資料更新至 2026/09/06 23:00｜檢驗不合格、預防性下架與回收範圍分開標示。</p>
+<p class="sc-stage">資料更新至 2026/09/08 23:00｜檢驗不合格、預防性下架與回收範圍分開標示。</p>
 <section class="sc-workspace" aria-labelledby="search-title">
-<div class="sc-search"><h2 id="search-title">查詢問題油品</h2>
+<div class="sc-search"><h2 id="search-title">查詢問題油品</h2><p class="sc-search-scope"><strong>可查詢：</strong>本站已收錄的苦茶油、黑麻油、胡麻油、南瓜籽油、亞麻仁油等問題油品與批次，以及中聯油脂案相關產品。</p><p class="sc-search-scope-note">輸入品牌、商品名稱或已收錄條碼；可加填有效日期縮小結果。未公告或尚未收錄的產品查不到，不能據此判定安全。</p>
 <form id="sc-form"><label for="q">品牌、商品名稱或條碼</label><div class="sc-queryrow"><input id="q" type="search" placeholder="例如：麻油車、由豐將" autocomplete="off" required aria-describedby="sc-search-help"><button class="sc-primary" type="submit">開始查詢 →</button></div>
 <div class="sc-filters"><div><label for="sc-kind">查詢範圍</label><select id="sc-kind"><option value="all">所有已收錄油品</option value="camellia">苦茶油與其他油品</option value="union">中聯油脂案</option></select></div><div><label for="sc-date">有效日期（選填）</label><input id="sc-date" type="text" inputmode="numeric" placeholder="例如：20280705" aria-describedby="sc-date-help"><span class="sc-helper" id="sc-date-help">可輸入 2028/07/05 或 20280705</span></div></div>
 <p class="sc-helper" id="sc-search-help">查不到 ≠ 安全。條碼與批次資料可能尚未收錄。</p></form>
@@ -24,8 +24,9 @@ app.innerHTML=`<main class="sc">${scHeader()}
 <aside class="sc-guide"><h2>先核對，再判讀</h2><ol class="sc-steps"><li><div><strong>看清商品名稱</strong><p>同品牌可能有不同油品，不要只看公司名稱。</p></div></li><li><div><strong>找瓶身有效日期</strong><p>包裝日期、製造日期與有效日期並不相同。</p></div></li><li><div><strong>確認公告處置範圍</strong><p>超標批次、預防性下架及擴大退貨分開看。</p></div></li></ol></aside></section>
 <div class="sc-privacy"><span>免登入</span><span>不紀錄查詢個資</span><span>不讀取發票載具</span></div>
 <section id="sc-results" class="sc-results" aria-live="polite" aria-atomic="false" aria-label="查詢結果"></section>
-<section class="sc-section" aria-labelledby="news-title"><div class="sc-section-head"><h2 id="news-title">這幾天，先留意</h2><span>查核至 2026/09/05 · 點閱原始公告</span></div>
-<div class="sc-news"><article><time datetime="2026-09-04">09.04 / 臺北市衛生局</time><h3>惠家香南瓜籽油<br>不分批號預防性下架</h3><p>公告檢驗批次有效日期為 2028/03/11。其他批次的預防性措施，不等同每批均已驗出超標。</p><a href="https://health.gov.taipei/News_Content.aspx?n=BB5A41BA1E6CA260&amp;s=5A8066C63129ABD1&amp;sms=72544237BBE4C5F6" target="_blank" rel="noopener noreferrer">閱讀官方公告 ↗</a></article>
+<section class="sc-section" aria-labelledby="news-title"><div class="sc-section-head"><h2 id="news-title">這幾天，先留意</h2><span>查核至 2026/09/08 · 點閱原始公告</span></div>
+<div class="sc-news"><article><time datetime="2026-09-07">09.07 / 臺北市衛生局</time><h3>第4波油品抽驗<br>4個效期確認不合格</h3><p>麻油車冷壓黑麻油新增兩效期、金葫蘆特級胡麻油3L新增兩效期。兩案先前都已不分批號預防性下架。</p><a href="https://health.gov.taipei/News_Content.aspx?n=BB5A41BA1E6CA260&amp;s=9F7188A8D1254D7D&amp;sms=72544237BBE4C5F6" target="_blank" rel="noopener noreferrer">閱讀官方公告 ↗</a></article>
+<article><time datetime="2026-09-04">09.04 / 臺北市衛生局</time><h3>惠家香南瓜籽油<br>不分批號預防性下架</h3><p>公告檢驗批次有效日期為 2028/03/11。其他批次的預防性措施，不等同每批均已驗出超標。</p><a href="https://health.gov.taipei/News_Content.aspx?n=BB5A41BA1E6CA260&amp;s=5A8066C63129ABD1&amp;sms=72544237BBE4C5F6" target="_blank" rel="noopener noreferrer">閱讀官方公告 ↗</a></article>
 <article><time datetime="2026-09-01">09.01 / 新北市衛生局</time><h3>永利胡麻油案<br>核對兩款市售產品</h3><p>金葫蘆特級胡麻油 3L（2028/08/13）、好時來小磨香油 3L（2028/08/18）列入處置；請核對包裝。</p><a href="https://www.fda.gov.tw/tc/csmnewsContent.aspx?id=t634648&amp;mid=267" target="_blank" rel="noopener noreferrer">閱讀官方公告 ↗</a></article>
 <article><time datetime="2026-09-02">09.02 / 衛生福利部</time><h3>中聯油脂案<br>20% 比例來源的官方說明</h3><p>衛福部表示，比例來自 7/4 專家會議建議，並駁斥「總統指示」說法。這不是新增問題產品公告。</p><a href="https://www.fda.gov.tw/tc/newsContent.aspx?cid=4&amp;id=31722" target="_blank" rel="noopener noreferrer">閱讀官方說明 ↗</a></article></div></section>
 <section class="sc-section"><div class="sc-section-head"><h2>把事件看清楚</h2><span>檢驗、處置與責任，分開閱讀</span></div><div class="sc-topics"><article class="sc-topic"><p class="sc-eyebrow">01 / 油品抽驗與追查</p><h3>苦茶油與其他油品</h3><p>不同品牌、代工廠與原料來源，不直接併成同一條供應鏈。</p><div class="sc-topic-links"><a href="#/camellia">事件時序 →</a><a href="camellia-report.html">我們的整理 →</a></div></article><article class="sc-topic"><p class="sc-eyebrow">02 / 中聯油脂事件</p><h3>從異常警訊到通報</h3><p>追蹤下游處置與司法進度；起訴指控不等同法院定罪。</p><div class="sc-topic-links"><a href="#/union-timeline">事件時序 →</a><a href="union-report.html">我們的整理 →</a></div></article></div></section>
@@ -71,7 +72,7 @@ function route(){
  else if(path==='union-timeline')unionStory();
  else{home();if(path==='union')document.getElementById('sc-kind').value='union';else if(path==='camellia-check')document.getElementById('sc-kind').value='camellia'}
  if(path==='camellia'||path==='union-timeline'){
- document.querySelectorAll('.date,.footer span:last-child').forEach(el=>el.textContent='v1.43・資料至 2026/09/06');
+ document.querySelectorAll('.date,.footer span:last-child').forEach(el=>el.textContent='v1.44・資料至 2026/09/08');
  document.querySelectorAll('.eventCard h3,.eventCard p').forEach(el=>el.innerHTML=rich(el.textContent));
  }
  scrollTo(0,0);
